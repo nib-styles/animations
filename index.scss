@@ -1,0 +1,132 @@
+// Fade something in by applying .fade-in
+// -------------------------------------
+
+@include keyframes('fadeIn') { 
+	to { opacity:1; } 
+}
+
+.fade-in {
+    @include animation(fadeIn ease-in 0.5s forwards); // name, timing, duration, fill-mode
+    @include animation-play-state(running);
+    opacity:0;
+
+    .no-cssanimations & {
+    	opacity: 1;
+    }
+}
+
+// Slide something up by applying .slide-up
+// -------------------------------------
+
+@include keyframes('slide-up') { 
+	to {top: 0;}
+}
+
+.slide-up {
+	position: relative;
+  @include transition(all 0.6s ease-in);
+  .csstransitions &.is-paused {
+    @include transform(translateY(20px));
+  }
+}
+
+// Pulsing Buttons
+// -------------------------------------
+
+@include keyframes('pulsate-orange') { 
+	0% {
+		box-shadow: none;
+	}
+    50% {
+    	box-shadow: 0 0 20px 4px rgba(#fdfad1, 0.25);
+    }
+    100% {
+    	box-shadow: none;
+    }
+}
+
+.pulsate-orange {
+    @include animation(pulsate-orange ease-in 3s infinite); // name, timing, duration, iteration
+}
+
+
+// Scale down and rotate
+// Shrink and rotate the '30 Day' badge into place
+// -------------------------------------
+
+@include keyframes('shrink-rotate') { 
+
+	from {
+		@include transform(rotate(-60deg) scale(1.5));
+
+	}
+	to {
+		@include transform(rotate(0) scale(1.0));
+	}
+}
+
+.shrink-rotate {
+	@include animation(shrink-rotate ease-in-out 0.5s 1 forwards); // name, timing, duration, iteration, delay
+	@include transform(rotate(-60deg) scale(1.5));
+
+	.no-cssanimations & {
+		@include transform(rotate(0) scale(1.0));
+	}
+}
+
+// Winking pig
+// -------------------------------------
+
+@include keyframes('winky-poo') { 
+	0% {opacity: 0;}
+	49% {opacity: 0;}
+    50% {opacity: 1;} // wink
+    51% {opacity: 0;}
+    52% {opacity: 1;} // wink
+    53% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+.wink {
+	position: relative;
+
+	&:after {
+	    @include animation(winky-poo ease 8s infinite 5s); // name, timing, duration, iteration, delay
+		background: #fff;
+		content: "";
+		display: block;
+		height: 20px;
+		left: 60px;
+		opacity: 0;
+		position: absolute;
+		top: 60px;
+		width: 20px;
+		z-index: 1000;
+	}
+}
+
+
+// Slide up and rotate
+// Slide the negatively rotated 'iphone hand' up and give it a positive rotation
+// -------------------------------------
+
+@include keyframes('slide-up-rotate') { 
+	to {
+		@include transform(rotate(25deg));
+		right: 0;
+		top: 25px;
+	}
+}
+
+.slide-up-rotate {
+	@include animation(slide-up-rotate cubic-bezier(0.165, 0.840, 0.440, 1.000) .7s forwards); // name, timing, duration, fill-mode
+	@include transform(rotate(-25deg));
+	right: 200px;
+	top: 400px;
+
+	.no-cssanimations & {
+		@include transform(rotate(0) scale(1.0));
+		top: 25px;
+		right: 0;
+	}
+}

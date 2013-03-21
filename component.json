@@ -1,0 +1,9 @@
+{
+  "name": "animations",
+  "main": "index.scss",
+  "version": "0.1.0",
+  "dependencies": {
+    "nib-styles-common": "*"
+  },
+  "styles": ["index.scss"]
+}
